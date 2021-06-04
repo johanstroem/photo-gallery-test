@@ -1,5 +1,5 @@
 import FlexColumn from './FlexColumn'
-import FlexRow from './FlexRow'
-import { media } from './media'
+import Row from './Row'
+import Column from './Column'
 
-export { FlexColumn, FlexRow, media }
+export { FlexColumn, Row, Column }

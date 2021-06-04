@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FlexColumn, media } from './components/layout'
+import Gallery from './components/gallery'
+import { FlexColumn } from './components/layout'
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
         <Title>Zington Photo Gallery</Title>
       </AppHeader>
       <AppContent>
-        <p>TEST</p>
+        <Gallery />
       </AppContent>
     </AppContainer>
   )
@@ -31,12 +32,6 @@ const AppHeader = styled(FlexColumn)`
 
 const AppContent = styled(FlexColumn)`
   min-height: 90vh;
-  display: flex;
-  flex-direction: column;
-
-  @media ${media.desktop} {
-    flex-direction: row;
-  }
 `
 
 export default App
