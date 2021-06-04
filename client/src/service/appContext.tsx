@@ -1,47 +1,39 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { getPhotos, Photo } from './photos'
 
-type Action = { type: 'get'; payload: Photo[] }
-
-type Dispatch = (action: Action) => void
 type State = {
   photos: Photo[]
+  loading: boolean
 }
 
 type AppProviderProps = { children: React.ReactNode }
 
-const AppStateContext =
-  createContext<{ state: State; dispatch: Dispatch } | undefined>(undefined)
+const AppStateContext = createContext<State | undefined>(undefined)
 
 AppStateContext.displayName = 'AppContext'
 
-function appReducer(state: State, action: Action) {
-  switch (action.type) {
-    case 'get': {
-      return {
-        ...state,
-        photos: action.payload,
-      }
-    }
-    default: {
-      throw new Error(`Unhandled action type: ${action}`)
-    }
-  }
-}
-
 function AppProvider({ children }: AppProviderProps) {
-  const photos = getPhotos()
-  const initialState: State = {
-    photos,
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<Photo[]>([])
+
+  const loadData = async () => {
+    setLoading(true)
+    const response = await getPhotos()
+    setData(response.results)
+    setLoading(false)
   }
 
-  const [state, dispatch] = useReducer(appReducer, initialState)
-  // NOTE: you *might* need to memoize this value
-  // Learn more in http://kcd.im/optimize-context
-  const value = { state, dispatch }
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const initialState: State = {
+    photos: data,
+    loading,
+  }
 
   return (
-    <AppStateContext.Provider value={value}>
+    <AppStateContext.Provider value={{ loading, photos: data }}>
       {children}
     </AppStateContext.Provider>
   )
