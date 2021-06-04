@@ -1,26 +1,43 @@
 import React from 'react'
-import logo from './logo.svg'
+import styled from 'styled-components'
 import './App.css'
+import { FlexColumn, media } from './components/layout'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <AppHeader>
+        <Title>Zington Photo Gallery</Title>
+      </AppHeader>
+      <AppContent>
+        <p>TEST</p>
+      </AppContent>
+    </AppContainer>
   )
 }
+
+const AppContainer = styled.div`
+  text-align: center;
+  background-color: aliceblue;
+`
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+`
+
+const AppHeader = styled(FlexColumn)`
+  justify-content: center;
+  min-height: 10vh;
+`
+
+const AppContent = styled(FlexColumn)`
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  @media ${media.desktop} {
+    flex-direction: row;
+  }
+`
 
 export default App
