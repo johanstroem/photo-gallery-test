@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { getPhotos, Photo } from './photos'
+import { getPhotos, Person } from './photos'
 
 type State = {
-  photos: Photo[]
+  persons: Person[]
   loading: boolean
 }
 
@@ -14,7 +14,7 @@ AppStateContext.displayName = 'AppContext'
 
 function AppProvider({ children }: AppProviderProps) {
   const [loading, setLoading] = useState(false)
-  const [data, setData] = useState<Photo[]>([])
+  const [data, setData] = useState<Person[]>([])
 
   const loadData = async () => {
     setLoading(true)
@@ -27,13 +27,8 @@ function AppProvider({ children }: AppProviderProps) {
     loadData()
   }, [])
 
-  const initialState: State = {
-    photos: data,
-    loading,
-  }
-
   return (
-    <AppStateContext.Provider value={{ loading, photos: data }}>
+    <AppStateContext.Provider value={{ loading, persons: data }}>
       {children}
     </AppStateContext.Provider>
   )

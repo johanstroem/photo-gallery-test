@@ -1,24 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useAppContext } from '../../service/appContext'
+import { Person } from '../../service/photos'
 import { FlexColumn, Row, Column } from '../layout'
+import { useSlices } from './useSlices'
+
+const NUMBER_OF_COLUMNS = 4
 
 function Gallery() {
-  const { loading, photos } = useAppContext()
+  const { loading, persons } = useAppContext()
+
+  const slices = useSlices<Person>(persons, NUMBER_OF_COLUMNS)
+
+  // eslint-disable-next-line react/no-array-index-key
+  const Columns = slices.map((col, i) => <Column key={`column-${i}`}> {col.length} </Column>)
 
   return (
     <GalleryContainer>
       <GalleryHeader>Photos:</GalleryHeader>
-      {loading ? (
-        <p>...loading</p>
-      ) : (
-        <Row>
-          <Column>{ photos.length }</Column>
-          <Column>Hej 2</Column>
-          <Column>Hej 3</Column>
-          <Column>Hej 4</Column>
-        </Row>
-      )}
+      {loading ? <p>...loading</p> : <Row>{Columns}</Row>}
     </GalleryContainer>
   )
 }
