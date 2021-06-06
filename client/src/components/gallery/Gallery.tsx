@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useAppContext } from '../../service/appContext'
 import { Person } from '../../service/photos'
 import { FlexColumn, Row, Column } from '../layout'
+import PersonList from './PersonList'
 import { useSlices } from './useSlices'
 
 const NUMBER_OF_COLUMNS = 4
@@ -12,8 +13,15 @@ function Gallery() {
 
   const slices = useSlices<Person>(persons, NUMBER_OF_COLUMNS)
 
-  // eslint-disable-next-line react/no-array-index-key
-  const Columns = slices.map((col, i) => <Column key={`column-${i}`}> {col.length} </Column>)
+  const Columns = slices.map((col, i) => {
+    const key = `column-${i}`
+    return (
+      // eslint-disable-next-line react/no-array-index-key
+      <Column key={key}>
+        <PersonList persons={col} />
+      </Column>
+    )
+  })
 
   return (
     <GalleryContainer>
@@ -23,45 +31,10 @@ function Gallery() {
   )
 }
 
-const GalleryContainer = styled(FlexColumn)`
-  text-align: center;
-  flex-direction: flex-start;
-  min-width: 40vw;
-`
+const GalleryContainer = styled(FlexColumn)``
 
-const GalleryHeader = styled.h1`
+const GalleryHeader = styled.h2`
   color: LightSeaGreen;
-`
-
-const ImageContainer = styled.img`
-  margin-top: 8px;
-  vertical-align: middle;
-  width: 100%;
-`
-
-const ListContent = styled(FlexColumn)`
-  justify-content: center;
-  align-items: center;
-`
-
-const ListItem = styled.p<{ isSelected: boolean }>`
-  display block;
-  border: ${(p) =>
-    p.isSelected ? '2px solid LightSeaGreen' : '2px solid LightSlateGrey'};
-  border-radius: 12px;
-  padding: 6px;
-  font-size: 1em;
-  line-height: 1.2em;
-  min-width: 120px;
-  max-width: 200px;
-  text-overflow: ellipsis;
-  overflow: hidden;     
-  white-space: nowrap;
-`
-
-const DeleteIcon = styled.img`
-  height: 24px;
-  margin-left: 12px;
 `
 
 export default Gallery
