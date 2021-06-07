@@ -19,6 +19,14 @@ The app features a global state for storing information about the currently view
 
 ## Running the project
 
+### Cloning the repository
+Create a local copy of this repository by running
+`git@github.com:johanstroem/photo-gallery-test.git`
+
+### Installing dependencies
+Install the project dependencies by navigation to the `photo-gallery-test` catalog
+and run `yarn install`
+
 ### Running the development server
 
 `yarn start` Runs the app in the development mode.\
