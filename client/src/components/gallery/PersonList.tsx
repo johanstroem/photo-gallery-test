@@ -11,7 +11,11 @@ type PersonListProps = {
 function PersonList({ persons }: PersonListProps) {
   const Persons = persons.map((p) => <PersonCard key={p.id} person={p} />)
 
-  return <PersonListContainer>{Persons}</PersonListContainer>
+  return (
+    <PersonListContainer>
+      {Persons}
+    </PersonListContainer>
+  )
 }
 
 const PersonListContainer = styled(FlexColumn)`

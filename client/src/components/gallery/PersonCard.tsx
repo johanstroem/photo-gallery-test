@@ -6,7 +6,7 @@ import { FlexColumn } from '../layout'
 type PersonCardProps = {
   person: Person
 }
-const Overlay = ({children}: {children: ReactNode} ) => (
+const Overlay = ({ children }: {children: ReactNode} ) => (
   <OverlayContainer>
     {children}
   </OverlayContainer>

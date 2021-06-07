@@ -15,18 +15,25 @@ export type Person = {
   photo: Photo
 }
 
+
+export type Pagination = {
+  page: number
+  results: number
+  seed: string
+}
+
 type PaginatedResponse<T> = {
-  info: {
-    page: number
-    results: number
-  }
+  info: Pagination
   results: T[]
 }
 
 type PersonsResponse = PaginatedResponse<Person>
 
-export const getPhotos = async (): Promise<PersonsResponse> =>
-  fetch('https://randomuser.me/api/?inc=dob,email,gender,login,name,picture&results=50')
+const INCLUDED_PROPS = ['dob','email','gender','login','name','picture']
+const NUMBER_RESULTS = 50
+
+export const getPhotos = async (page: number): Promise<PersonsResponse> =>
+  fetch(`https://randomuser.me/api/?inc=${INCLUDED_PROPS.join(',')}&page=${page}&results=${NUMBER_RESULTS}&seed=zington`)
     .then((res) => res.json())
     .then((res) => mapResponseObject(res))
     // .catch((err) => console.error('Error fetching users', err))
