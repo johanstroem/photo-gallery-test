@@ -26,9 +26,9 @@ function Gallery() {
   return (
     <GalleryContainer>
       <GalleryHeader>
-        <PaginationNav onClick={() => pagination.setPage(pagination.page-1)}>{'<'}</PaginationNav>
+        <PaginationButton onClick={() => pagination.setPage(pagination.page-1)}>{'<'}</PaginationButton>
         <GalleryTitle>Page: {pagination.page} </GalleryTitle>
-        <PaginationNav onClick={() => pagination.setPage(pagination.page+1)}>{'>'}</PaginationNav>
+        <PaginationButton onClick={() => pagination.setPage(pagination.page+1)}>{'>'}</PaginationButton>
       </GalleryHeader>
       {loading ? <span>...loading</span> : (
         <Row>
@@ -47,7 +47,7 @@ const GalleryHeader = styled.div`
   align-items: center;
 `
 
-const PaginationNav = styled.button`
+const PaginationButton = styled.button`
   font-size: 2.1em;
   font-weight: bold;
   background: transparent;

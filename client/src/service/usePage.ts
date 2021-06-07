@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const usePage = (p=1) => {
+export const usePage = (p = 1) => {
   const [page, setPage] = useState(p)
 
   const updatePage = (nextPage: number) => {
