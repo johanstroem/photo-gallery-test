@@ -26,7 +26,7 @@ type PaginatedResponse<T> = {
 type PersonsResponse = PaginatedResponse<Person>
 
 export const getPhotos = async (): Promise<PersonsResponse> =>
-  fetch('https://randomuser.me/api/?results=50')
+  fetch('https://randomuser.me/api/?inc=dob,email,gender,login,name,picture&results=50')
     .then((res) => res.json())
     .then((res) => mapResponseObject(res))
     // .catch((err) => console.error('Error fetching users', err))
